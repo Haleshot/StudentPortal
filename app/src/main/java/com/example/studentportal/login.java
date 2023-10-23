@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.studentportal;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,14 +12,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+//import com.google.firebase.auth.AuthResult;
+//import com.google.firebase.auth.FirebaseAuth;
 
 public class login extends AppCompatActivity {
     EditText sapid;
     EditText password;
     Button loginbtn;
-    FirebaseAuth auth;
+//    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class login extends AppCompatActivity {
         password = findViewById(R.id.password);
         loginbtn = findViewById(R.id.login);
 
-        auth = FirebaseAuth.getInstance();
+//        auth = FirebaseAuth.getInstance();
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,25 +39,26 @@ public class login extends AppCompatActivity {
                 if (TextUtils.isEmpty(sap) || TextUtils.isEmpty(pass)) {
                     Toast.makeText(login.this, "Enter credentials", Toast.LENGTH_SHORT).show();
                 } else {
-                    loginUser(sap, pass);
+                    Toast.makeText(login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+//                    loginUser(sap, pass);
                 }
             }
         });
     }
 
-    private void loginUser(String sap, String pass) {
-        auth.signInWithEmailAndPassword(sap + "@domain.com", pass)
-                .addOnCompleteListener(login.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(login.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
+//    private void loginUser(String sap, String pass) {
+//        auth.signInWithEmailAndPassword(sap + "@.com", pass)
+//                .addOnCompleteListener(login.this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            Toast.makeText(login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(login.this, "Login Failed", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//    }
 }
 //package com.example.myapplication;
 //

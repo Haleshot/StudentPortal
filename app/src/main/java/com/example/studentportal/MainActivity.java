@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     Button altlogin;
     DatabaseReference databaseReference;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         altlogin = findViewById(R.id.altlogin);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
 
+
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,18 +46,50 @@ public class MainActivity extends AppCompatActivity {
                     String userSapid = sapid.getText().toString().trim();
                     String userPassword = password.getText().toString().trim();
 
-                    User user = new User(userName, userEmail, userPhone, userSapid, userPassword);
-                    databaseReference.child(userSapid).setValue(user);
+                    DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("users");
+                    DatabaseReference currentUserRef = usersRef.child(userSapid);
+
+                    currentUserRef.child("name").setValue(userName);
+                    currentUserRef.child("email").setValue(userEmail);
+                    currentUserRef.child("phone").setValue(userPhone);
+                    currentUserRef.child("sapid").setValue(userSapid);
+                    currentUserRef.child("password").setValue(userPassword);
 
                     Toast.makeText(MainActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, com.example.studentportal.login.class);
+                    startActivity(intent);
+                    name.getText().clear();
+                    email.getText().clear();
+                    phone.getText().clear();
+                    sapid.getText().clear();
+                    password.getText().clear();
                 }
             }
         });
 
+
+//        signup.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (inputValidation()) {
+//                    String userName = name.getText().toString().trim();
+//                    String userEmail = email.getText().toString().trim();
+//                    String userPhone = phone.getText().toString().trim();
+//                    String userSapid = sapid.getText().toString().trim();
+//                    String userPassword = password.getText().toString().trim();
+//
+//                    User user = new User(userName, userEmail, userPhone, userSapid, userPassword);
+//                    databaseReference.child(userSapid).setValue(user);
+//
+//                    Toast.makeText(MainActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+
         altlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Login.class);
+                Intent intent = new Intent(MainActivity.this, login.class);
                 startActivity(intent);
             }
         });
