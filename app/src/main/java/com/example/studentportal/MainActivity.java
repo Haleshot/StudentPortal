@@ -99,17 +99,18 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
 
+        // Validation for Email
+        if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches() || !userEmail.endsWith("@nmims.edu.in")) {
+            Toast.makeText(MainActivity.this, "Enter a valid NMIMS email address", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         // Validation for Phone
         if (userPhone.length() != 10 || !TextUtils.isDigitsOnly(userPhone)) {
             Toast.makeText(MainActivity.this, "Phone should be 10 digits long and contain only numbers", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        // Validation for Email
-        if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches() || !userEmail.endsWith("@nmims.edu.in")) {
-            Toast.makeText(MainActivity.this, "Enter a valid NMIMS email address", Toast.LENGTH_SHORT).show();
-            return false;
-        }
 
         // Validation for SAP ID
         if (userSapid.length() != 11 || !TextUtils.isDigitsOnly(userSapid)) {
