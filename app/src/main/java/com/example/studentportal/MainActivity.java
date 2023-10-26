@@ -3,6 +3,8 @@ package com.example.studentportal;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -68,23 +70,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-//        signup.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (inputValidation()) {
-//                    String userName = name.getText().toString().trim();
-//                    String userEmail = email.getText().toString().trim();
-//                    String userPhone = phone.getText().toString().trim();
-//                    String userSapid = sapid.getText().toString().trim();
-//                    String userPassword = password.getText().toString().trim();
-//
-//                    User user = new User(userName, userEmail, userPhone, userSapid, userPassword);
-//                    databaseReference.child(userSapid).setValue(user);
-//
-//                    Toast.makeText(MainActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+
 
         altlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,164 +82,50 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean inputValidation() {
-        if (name.getText().toString().isEmpty()) {
-            Toast.makeText(MainActivity.this, "Enter name", Toast.LENGTH_SHORT).show();
+        String userName = name.getText().toString().trim();
+        String userEmail = email.getText().toString().trim();
+        String userPhone = phone.getText().toString().trim();
+        String userSapid = sapid.getText().toString().trim();
+        String userPassword = password.getText().toString().trim();
+
+        if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(userEmail) || TextUtils.isEmpty(userPhone) || TextUtils.isEmpty(userSapid) || TextUtils.isEmpty(userPassword)) {
+            Toast.makeText(MainActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
             return false;
-        } else if (email.getText().toString().isEmpty()) {
-            Toast.makeText(MainActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
-            return false;
-        } else if (phone.getText().toString().isEmpty()) {
-            Toast.makeText(MainActivity.this, "Enter Phone no.", Toast.LENGTH_SHORT).show();
-            return false;
-        } else if (sapid.getText().toString().isEmpty()) {
-            Toast.makeText(MainActivity.this, "Enter SAP ID", Toast.LENGTH_SHORT).show();
-            return false;
-        } else if (password.getText().toString().isEmpty()) {
-            Toast.makeText(MainActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
-            return false;
-        } else {
-            return true;
         }
+
+        // Validation for Name
+        if (!userName.matches("[a-zA-Z]+")) {
+            Toast.makeText(MainActivity.this, "Name should only contain alphabets", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // Validation for Phone
+        if (userPhone.length() != 10 || !TextUtils.isDigitsOnly(userPhone)) {
+            Toast.makeText(MainActivity.this, "Phone should be 10 digits long and contain only numbers", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // Validation for Email
+        if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches() || !userEmail.endsWith("@nmims.edu.in")) {
+            Toast.makeText(MainActivity.this, "Enter a valid NMIMS email address", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // Validation for SAP ID
+        if (userSapid.length() != 11 || !TextUtils.isDigitsOnly(userSapid)) {
+            Toast.makeText(MainActivity.this, "SAP ID should be 11 digits long and contain only numbers", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // Validation for Password
+        if (userPassword.length() < 8 || userPassword.length() > 20
+                || !userPassword.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,20}$")) {
+            Toast.makeText(MainActivity.this, "Password should be 8-20 characters long and contain at least one number, one uppercase, one lowercase, and one special character", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+
+        return true;
     }
 }
 
-//
-//package com.example.studentportal;
-//
-//import androidx.appcompat.app.AppCompatActivity;
-//import android.content.Intent;
-//import android.os.Bundle;
-//import android.view.View;
-//import android.widget.Button;
-//import android.widget.EditText;
-//import android.widget.Toast;
-//
-//public class MainActivity extends AppCompatActivity {
-//    EditText name;
-//    EditText email;
-//    EditText phone;
-//    EditText sapid;
-//    EditText password;
-//    Button signup;
-//    Button altlogin;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//        name = findViewById(R.id.name);
-//        email = findViewById(R.id.email);
-//        phone = findViewById(R.id.phone);
-//        sapid = findViewById(R.id.sapid);
-//        password = findViewById(R.id.password);
-//        signup = findViewById(R.id.signup);
-//        altlogin = findViewById(R.id.altlogin);
-//
-//        signup.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String sap = sapid.getText().toString();
-//                String pass = password.getText().toString();
-//                if (TextUtils.isEmpty(sap || TextUtils.isEmpty(pass))) {
-//                    Toast.makeText(MainActivity.this, "Enter credentials", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//            }
-//        });
-//
-//        altlogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, login.class);
-//                startActivity(intent);
-//            }
-//        });
-//    }
-//
-//    public boolean inputValidation() {
-//        if (name.getText().toString().isEmpty()) {
-//            Toast.makeText(MainActivity.this, "Enter name", Toast.LENGTH_SHORT).show();
-//            return false;
-//        } else if (email.getText().toString().isEmpty()) {
-//            Toast.makeText(MainActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
-//            return false;
-//        } else if (phone.getText().toString().isEmpty()) {
-//            Toast.makeText(MainActivity.this, "Enter Phone no.", Toast.LENGTH_SHORT).show();
-//            return false;
-//        } else if (sapid.getText().toString().isEmpty()) {
-//            Toast.makeText(MainActivity.this, "Enter SAP ID", Toast.LENGTH_SHORT).show();
-//            return false;
-//        } else if (password.getText().toString().isEmpty()) {
-//            Toast.makeText(MainActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
-//}
-//
-////package com.example.studentportal;
-////
-////import androidx.appcompat.app.AppCompatActivity;
-////
-////import android.os.Bundle;
-////
-////public class MainActivity extends AppCompatActivity {
-////    EditText name;
-////    EditText email;
-////    EditText phone;
-////    EditText sapid;
-////    EditText password;
-////    Button signup;
-////    Button altlogin;
-////
-////
-////    @Override
-////    protected void onCreate(Bundle savedInstanceState) {
-////        super.onCreate(savedInstanceState);
-////        setContentView(R.layout.activity_main);
-////        name = findViewById(R.id.name);
-////        email = finviewById(R.id.email);
-////        phone = findViewById(R.id.phone);
-////        sapid = findViewById(R.id.sapid);
-////        password = findViewById(R.id.password);
-////    }
-////    public boolean inputValidation() {
-////        if (name.getText().toString().isEmpty()) {
-////            Toast.makeText(MainActivity.this, "Enter name", Toast.LENGTH_SHORT).show();
-////            return false;
-////        } else if (email.getText().toString().isEmpty()) {
-////            Toast.makeText(MainActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
-////            return false;
-////        } else if (phone.getText().toString().isEmpty()) {
-////            Toast.makeText(MainActivity.this, "Enter Phone no.", Toast.LENGTH_SHORT).show();
-////            return false;
-////        } else if (sapid.getText().toString().isEmpty()) {
-////            Toast.makeText(MainActivity.this, "Enter SAP ID", Toast.LENGTH_SHORT).show();
-////            return false;
-////        } else if (password.getText().toString().isEmpty()) {
-////            Toast.makeText(MainActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
-////            return false;
-////        } else {
-////            return true;
-////        }
-////    }
-////
-////    inputValidation();
-////    signup.setOnClickListener(new View.OnClickListener() {
-////        @Override
-////        public void onClick(View v) {
-////            if (inputValidation()) {
-////                Toast.makeText(MainActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-////            }
-////        }
-////    });
-////    altlogin.setOnClickListener(new View.OnClickListener() {
-////        @Override
-////        public void onClick(View v) {
-////            Intent intent = new Intent(MainActivity.this, login.class);
-////            startActivity(intent);
-////        }
-////    });
-////    }
-////}
