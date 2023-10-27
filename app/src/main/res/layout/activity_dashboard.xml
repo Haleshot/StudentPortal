@@ -15,7 +15,24 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <!-- Add your other content here -->
+    <!-- Buttons for different actions -->
+    <Button
+        android:id="@+id/updateProfileButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Profile" />
+
+    <Button
+        android:id="@+id/deleteProfileButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Profile" />
+
+    <Button
+        android:id="@+id/addAnnouncementButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Announcement" />
 
     <Button
         android:id="@+id/logoutButton"

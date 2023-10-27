@@ -56,7 +56,14 @@ public class login extends AppCompatActivity {
                         Toast.makeText(login.this, "Login Successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(login.this, com.example.studentportal.Dashboard.class);
                         String userName = dataSnapshot.child("name").getValue(String.class);
+                        String userEmail = dataSnapshot.child("email").getValue(String.class);
+                        String userPhone = dataSnapshot.child("phone").getValue(String.class);
+                        String userSapid = dataSnapshot.child("sapid").getValue(String.class);
+                        intent.putExtra("userEmail", userEmail);
+                        intent.putExtra("userPhone", userPhone);
+                        intent.putExtra("userSapid", userSapid);
                         intent.putExtra("userName", userName);
+                        intent.putExtra("userPassword", storedPassword);
                         startActivity(intent);
                     } else {
                         Toast.makeText(login.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
