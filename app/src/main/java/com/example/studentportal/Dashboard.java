@@ -9,8 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.studentportal.R;
-
 public class Dashboard extends AppCompatActivity {
 
     @Override
@@ -20,6 +18,7 @@ public class Dashboard extends AppCompatActivity {
 
         TextView welcomeMessage = findViewById(R.id.welcomeMessage);
         Button logoutButton = findViewById(R.id.logoutButton);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button announcementButton = findViewById(R.id.announcementButton);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button updateButton = findViewById(R.id.updateProfileButton);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button deleteButton = findViewById(R.id.deleteProfileButton);
 
@@ -46,6 +45,17 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
+        announcementButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to announcement activity
+                Intent intent= new Intent(Dashboard.this, Announcement.class);
+                intent.putExtra("userName", userName);
+                intent.putExtra("userSapid", userSapid);
+                startActivity(intent);
+            }
+        });
+
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +69,8 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override

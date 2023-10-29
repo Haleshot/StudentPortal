@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
     tools:context=".MainActivity">
+
 
     <TextView
         android:id="@+id/signuptext"
@@ -14,6 +16,7 @@
         android:textAlignment="center"
         android:textSize="20dp"
         android:textStyle="italic"
+        android:theme="@style/Base.Theme.StudentPortal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,8 +25,8 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="235dp"
+        android:layout_height="236dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -31,8 +34,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.105"
-        app:srcCompat="@drawable/main"
+        app:layout_constraintVertical_bias="0.129"
+        app:srcCompat="@drawable/logo"
         tools:ignore="ExtraText" />
 
     <EditText
@@ -123,6 +126,7 @@
         android:textAlignment="center"
         android:textSize="18dp"
         android:textStyle="italic"
+        android:theme="@style/Base.Theme.StudentPortal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

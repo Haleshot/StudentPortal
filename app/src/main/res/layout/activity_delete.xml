@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
     android:gravity="center">
 
     <TextView
@@ -13,6 +14,7 @@
         android:layout_height="wrap_content"
         android:text="DELETE PROFILE?"
         android:textStyle="bold"
+        android:theme="@style/Base.Theme.StudentPortal"
         android:textSize="24sp"
         android:layout_gravity="center_horizontal" />
 

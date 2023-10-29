@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         signup = findViewById(R.id.signup);
         altlogin = findViewById(R.id.altlogin);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
-
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,9 +66,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
 
         altlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
 
-
         // Validation for SAP ID
         if (userSapid.length() != 11 || !TextUtils.isDigitsOnly(userSapid)) {
             Toast.makeText(MainActivity.this, "SAP ID should be 11 digits long and contain only numbers", Toast.LENGTH_SHORT).show();
@@ -124,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Password should be 8-20 characters long and contain at least one number, one uppercase, one lowercase, and one special character", Toast.LENGTH_SHORT).show();
             return false;
         }
-
 
         return true;
     }
